@@ -1,0 +1,327 @@
+﻿<Page x:Class="FitApp.Menu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FitApp"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="600"
+      Title="Menu">
+
+    <Page.Resources>
+        <!-- Style of menu text -->
+        <Style x:Key="font" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <!-- Tooltip style -->
+        <Style TargetType="ToolTip" x:Key="tt_style">
+            <Setter Property="Placement" Value="Right" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Background" Value="#4A5668" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="PlacementRectangle" Value="60,0,0,0" />
+            <Setter Property="HorizontalOffset" Value="15" />
+            <Setter Property="VerticalOffset" Value="6" />
+            <Setter Property="HasDropShadow" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid Background="Black">
+            <Grid x:Name="background">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Assets/background.jpg"
+                                Stretch="Fill" />
+                </Grid.Background>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65" />
+                    <ColumnDefinition Width="178" />
+                    <ColumnDefinition Width="178" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Summary -->
+                <Grid Column="1"
+                      Row="0"
+                      ColumnSpan="3">
+                    <Rectangle Height="60" Margin="10" Fill="White" RadiusY="10" RadiusX="10" >
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#333" RenderingBias="Quality" ShadowDepth="1"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Grid Margin="25,20,25.2,15">
+                        <Grid Width="40" Height="50" Background="#b8cf69" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                              Margin="20 0">
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="20" Color="#FFECECEC" RenderingBias="Quality" ShadowDepth="1"/>
+                            </Grid.Effect>
+                            <Image Source="Assets/meal30.png" Stretch="None"></Image>
+                        </Grid>
+                        <TextBlock Text="Podsumowanie dnia" HorizontalAlignment="Right" FontFamily="Champagne &amp; Limousines" Margin="5" VerticalAlignment="Top" Foreground="Gray"/>
+                        <TextBlock x:Name="summaryDay"  Text="dd.mm.rrrr" HorizontalAlignment="Right" FontFamily="Champagne &amp; Limousines" Margin="5 20" VerticalAlignment="Top" Foreground="Gray"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                    Margin="100 20 10 20">
+                            
+                            <TextBlock x:Name="dayKcalEaten"  Text="0" 
+                                       FontFamily="Champagne &amp; Limousines" VerticalAlignment="Center" Foreground="Gray" FontSize="25"/>
+                            <TextBlock Text=" kcal" FontFamily="Champagne &amp; Limousines"
+                                       Margin="0 0" Foreground="Gray" FontSize="15" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <Grid Row="1" Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Grid.Column="0" Source="Assets/seafood.png" Stretch="None"></Image>
+
+                    <!-- New meal button -->
+                    <Button Grid.Row="1"
+                            Grid.Column="0"
+                            Name="newMeal"
+                            Content="Skomponuj posiłek"
+                            FontWeight="Normal"
+                            BorderBrush="#FFF"
+                            HorizontalAlignment="Center"
+                            FontSize="15"
+                            Width="160"
+                            Height="40"
+                            BorderThickness="0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Click="newMeal_OnClick">
+                        <Button.Resources>
+                            <Color x:Key="PrimaryHueMidBrushColor">#b8cf69</Color>
+                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#699b2c" />
+                        </Button.Resources>
+
+                    </Button>
+                </Grid>
+
+                <Grid Row="1" Column="2" ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="150" Margin="5 0" Fill="#4A566850" RadiusY="20" RadiusX="20">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#333" RenderingBias="Quality" ShadowDepth="1" />
+                        </Rectangle.Effect>
+                    </Rectangle>
+
+                    <!-- Select meal header -->
+                    <Grid Row="0" Column="0" ColumnSpan="2" VerticalAlignment="Top">
+                        <Rectangle Height="40" Margin="5 0" Fill="White" RadiusY="10" RadiusX="10">
+                            <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="20" Color="#333" RenderingBias="Quality" ShadowDepth="1" />
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Margin="0 10 0 0">
+
+                            <TextBlock Text="Dodaj zjedzony posiłek"
+                                       FontFamily="Champagne &amp; Limousines" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" Foreground="Gray" FontSize="18" />
+
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Select meal combobox -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="25 15 0 0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Width="140">
+                        <ComboBox Name="comboBoxMeal"
+                                  materialDesign:TextFieldAssist.UnderlineBrush="#b8cf69"
+                                  materialDesign:BottomDashedLineAdorner.Brush="#b8cf69"
+                                  materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                                  materialDesign:ColorZoneAssist.Mode="Dark">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type local:Meal}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Foreground="LightGray" Text="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+
+                            </ComboBox.ItemTemplate>
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="Background" Value="#48575e"/>
+                                    <Setter Property="BorderBrush" Value="#48575e"/>
+                                </Style>
+
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </StackPanel>
+                    <Grid Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="25 15 10 0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="Wybierz posiłek..." 
+                                   IsHitTestVisible="False" 
+                                   FontSize="16"
+                                   Foreground="#999">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedItem, ElementName=comboBoxMeal}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <!-- Add meal to diet history button -->
+                    <Button Grid.Row="1"
+                            Grid.Column="1"
+                            Name="addMealToDiet"
+                            Content="Zjedzone!"
+                            FontWeight="Normal"
+                            BorderBrush="#FFF"
+                            HorizontalAlignment="Center"
+                            FontSize="15"
+                            Width="100"
+                            Height="40"
+                            BorderThickness="0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Click="addMealToDiet_OnClick">
+                        <Button.Resources>
+                            <Color x:Key="PrimaryHueMidBrushColor">#b8cf69</Color>
+                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#699b2c" />
+                        </Button.Resources>
+
+                    </Button>
+                </Grid>
+
+                <!-- Diet history header -->
+                <Grid Column="1"
+                      Row="2"
+                      ColumnSpan="3">
+                    <Rectangle Height="60" Margin="10" Fill="White" RadiusY="10" RadiusX="10">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#333" RenderingBias="Quality" ShadowDepth="1" />
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Grid Margin="25,20,25.2,15">
+                        <Grid Width="40" Height="50" Background="#b8cf69" HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Margin="20 0">
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="20" Color="#FFECECEC" RenderingBias="Quality"
+                                                  ShadowDepth="1" />
+                            </Grid.Effect>
+                            <Image Source="Assets/history30.png" Stretch="None" />
+                        </Grid>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="
+                                    Center"
+                                    VerticalAlignment="Top"
+                                    Margin="0 20 10 20">
+
+                            <TextBlock Text="Historia posiłków"
+                                       FontFamily="Champagne &amp; Limousines" VerticalAlignment="Center"
+                                       HorizontalAlignment="Left" Foreground="Gray" FontSize="18" />
+
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <!-- Diet history list -->
+                <Grid ColumnSpan="3"
+                      Column="1"
+                      Row="3">
+                    <StackPanel>
+                        <ListView Name="dietHistory" MaxHeight="510" SelectionChanged="onSelect">
+                            <ListView.ItemTemplate>
+                                <DataTemplate DataType="{x:Type local:DietHistoryItem}">
+                                    <StackPanel Orientation="Vertical">
+                                        <Grid>
+                                            <Rectangle Height="40" Width="515" Fill="#48575e" RadiusY="10" RadiusX="10">
+                                                <Rectangle.Effect>
+                                                    <DropShadowEffect BlurRadius="20" Color="#888"
+                                                                      RenderingBias="Quality" ShadowDepth="1" />
+                                                </Rectangle.Effect>
+                                            </Rectangle>
+                                            <Grid>
+                                                <Grid Width="120" Height="40" Background="#b7b094"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Center"
+                                                      Margin="15  0 0 0">
+                                                    <TextBlock FontFamily="Champagne &amp; Limousines" 
+                                                               Foreground="White" Text="{Binding Diet.Meal.Type}"
+                                                               TextAlignment="Center"
+                                                               VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Grid VerticalAlignment="Center"
+                                                      Margin="150 0 0 0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="75"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Grid.Column="0" 
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Champagne &amp; Limousines"
+                                                               Foreground="White"
+                                                               Text="{Binding Diet.Meal.Name}" />
+                                                    <TextBlock Grid.Column="1"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Champagne &amp; Limousines" 
+                                                               Foreground="White" 
+                                                               Text="{Binding Kcal, StringFormat={}{0} kcal}" />
+                                                    <TextBlock Grid.Column="2"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Champagne &amp; Limousines" 
+                                                               Foreground="White" 
+                                                               Text="{Binding Diet.Date, StringFormat=Data posiłku: &#x0a;{0:dd.MM.yyyy}}" />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

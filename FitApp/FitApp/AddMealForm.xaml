@@ -1,0 +1,503 @@
+﻿<Window x:Class="FitApp.AddMealForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Icon="Assets/app_icon.png"
+        MouseLeftButtonDown="windowMouseLeftButtonDown"
+        WindowStartupLocation="CenterScreen"
+        BorderThickness="1"
+        BorderBrush="#b8cf69"
+        Title="InputData" Height="500" Width="400">
+    <Window.Resources>
+        <!-- Close button style  -->
+        <ImageBrush x:Key="close_btn_mouseOver" ImageSource="Assets/closeBtn_MouseOver.png" />
+        <Style x:Key="CloseBtnS" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Button"
+                                BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"
+                                        TargetName="Button"
+                                        Value="{StaticResource close_btn_mouseOver}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style of menu text -->
+        <Style x:Key="font" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <!-- Tooltip style -->
+        <Style TargetType="ToolTip" x:Key="tt_style">
+            <Setter Property="Placement" Value="Right" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Background" Value="#4A5668" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="PlacementRectangle" Value="60,0,0,0" />
+            <Setter Property="HorizontalOffset" Value="15" />
+            <Setter Property="VerticalOffset" Value="6" />
+            <Setter Property="HasDropShadow" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid Background="Black">
+            <Grid x:Name="background">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Assets/background.jpg"
+                                Stretch="Fill" />
+                </Grid.Background>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button x:Name="close_btn"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0,5,5,0"
+                        Height="40"
+                        Width="40"
+                        BorderThickness="0"
+                        Style="{StaticResource CloseBtnS}" Click="Close_btn_OnClick">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/closeBtn_default.png" />
+                    </Button.Background>
+                </Button>
+
+                <!-- Title -->
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Text="Skomponuj posiłek:"
+                           HorizontalAlignment="Center"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+                </TextBlock>
+
+                <!-- Meal name -->
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Text="Nazwa posiłku:"
+                           FontSize="16"
+                           Margin="20 0 0 0"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+                </TextBlock>
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         Name="textBoxMealName"
+                         Foreground="White"
+                         Background="#0F999999"
+                         Padding="2 2 0 0"
+                         FontSize="16"
+                         Width="230"
+                         Height="40"
+                         Style="{StaticResource MaterialDesignTextBox}" 
+                         materialDesign:TextFieldAssist.UnderlineBrush="#b8cf69"
+                         CaretBrush="#b8cf69"></TextBox>
+
+                <!-- Meal type -->
+                <RadioButton Grid.Row="2" 
+                             Grid.Column="0"
+                             Grid.ColumnSpan="2"
+                             Margin="20"
+                             Name="BreakfastRadio"
+                             Foreground="White"
+                             IsChecked="True"
+                             Click="teaRadio_OnClick">
+                    <RadioButton.Content>Śniadanie</RadioButton.Content>
+                    <RadioButton.Resources>
+                        <!--Unchecked state-->
+                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+                        <!--Checked state-->
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#699b2c"/>
+                    </RadioButton.Resources>
+
+                </RadioButton>
+                <RadioButton Grid.Row="2" 
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Name="DinnerRadio"
+                          Margin="120 0 0 0"
+                          Foreground="White"
+                          Click="teaRadio_OnClick">
+                    <RadioButton.Content>Obiad</RadioButton.Content>
+                    <RadioButton.Resources>
+                        <!--Unchecked state-->
+                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+                        <!--Checked state-->
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#699b2c"/>
+                    </RadioButton.Resources>
+
+                </RadioButton>
+                <RadioButton Grid.Row="2" 
+                             Grid.Column="0"
+                             Grid.ColumnSpan="2"
+                             Name="TeaRadio"
+                             Margin="200 0 0 0"
+                             Foreground="White"
+                             Click="teaRadio_OnClick">
+                    <RadioButton.Content>Podwieczorek</RadioButton.Content>
+                    <RadioButton.Resources>
+                        <!--Unchecked state-->
+                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+                        <!--Checked state-->
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#699b2c"/>
+                    </RadioButton.Resources>
+
+                </RadioButton>
+                <RadioButton Grid.Row="2" 
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Name="SupperRadio"
+                          Margin="320 0 0 0"
+                          Foreground="White"
+                          Click="teaRadio_OnClick">
+                    <RadioButton.Content>Kolacja</RadioButton.Content>
+                    <RadioButton.Resources>
+                        <!--Unchecked state-->
+                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="White"/>
+                        <!--Checked state-->
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#699b2c"/>
+                    </RadioButton.Resources>
+
+                </RadioButton>
+
+                <!-- Select Ingredient #1 -->
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           Text="Składnik #1:"
+                           FontSize="16"
+                           Margin="20 0 0 0"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+                </TextBlock>
+                <StackPanel
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="10 15 10 0">
+                    <ComboBox Name="comboBoxIngredient1"
+                              materialDesign:TextFieldAssist.UnderlineBrush="#b8cf69"
+                              materialDesign:BottomDashedLineAdorner.Brush="#b8cf69"
+                              materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                              materialDesign:ColorZoneAssist.Mode="Dark">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:FoodProduct}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="LightGray" Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#48575e"/>
+                                <Setter Property="BorderBrush" Value="#48575e"/>
+                            </Style>
+
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+                </StackPanel>
+                <Grid Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="10 15 10 0">
+                    <TextBlock Text="Wybierz składnik..." 
+                               IsHitTestVisible="False" 
+                               FontSize="16"
+                               Foreground="#999">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedItem, ElementName=comboBoxIngredient1}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Select Ingredient #2 -->
+                <TextBlock Grid.Row="4"
+                           Grid.Column="0"
+                           Text="Składnik #2:"
+                           FontSize="16"
+                           Margin="20 0 0 0"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+                </TextBlock>
+                <StackPanel
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="10 15 10 0">
+                    <ComboBox Name="comboBoxIngredient2"
+                              materialDesign:TextFieldAssist.UnderlineBrush="#b8cf69"
+                              materialDesign:BottomDashedLineAdorner.Brush="#b8cf69"
+                              materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                              materialDesign:ColorZoneAssist.Mode="Dark">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:FoodProduct}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="LightGray" Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#48575e"/>
+                                <Setter Property="BorderBrush" Value="#48575e"/>
+                            </Style>
+
+                        </ComboBox.ItemContainerStyle>
+
+                    </ComboBox>
+                </StackPanel>
+                <Grid Grid.Row="4"
+                      Grid.Column="1"
+                      Margin="10 15 10 0">
+                    <TextBlock Text="Wybierz składnik..." 
+                               IsHitTestVisible="False" 
+                               FontSize="16"
+                               Foreground="#999">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedItem, ElementName=comboBoxIngredient2}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Select Ingredient #3 -->
+                <TextBlock Grid.Row="5"
+                           Grid.Column="0"
+                           Text="Składnik #3:"
+                           FontSize="16"
+                           Margin="20 0 0 0"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+                </TextBlock>
+                <StackPanel
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Margin="10 15 10 0">
+                    <ComboBox Name="comboBoxIngredient3"
+                              materialDesign:TextFieldAssist.UnderlineBrush="#b8cf69"
+                              materialDesign:BottomDashedLineAdorner.Brush="#b8cf69"
+                              materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                              materialDesign:ColorZoneAssist.Mode="Dark">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:FoodProduct}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="LightGray" Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#48575e"/>
+                                <Setter Property="BorderBrush" Value="#48575e"/>
+                            </Style>
+
+                        </ComboBox.ItemContainerStyle>
+
+                    </ComboBox>
+                </StackPanel>
+                <Grid Grid.Row="5"
+                      Grid.Column="1"
+                      Margin="10 15 10 0">
+                    <TextBlock Text="Wybierz składnik..." 
+                               IsHitTestVisible="False" 
+                               FontSize="16"
+                               Foreground="#999">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedItem, ElementName=comboBoxIngredient3}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Select Ingredient #4 -->
+                <TextBlock Grid.Row="6"
+                           Grid.Column="0"
+                           Text="Składnik #4:"
+                           FontSize="16"
+                           Margin="20 0 0 0"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+                </TextBlock>
+                <StackPanel
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Margin="10 15 10 0">
+                    <ComboBox Name="comboBoxIngredient4"
+                              materialDesign:TextFieldAssist.UnderlineBrush="#b8cf69"
+                              materialDesign:BottomDashedLineAdorner.Brush="#b8cf69"
+                              materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                              materialDesign:ColorZoneAssist.Mode="Dark">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:FoodProduct}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="LightGray" Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#48575e"/>
+                                <Setter Property="BorderBrush" Value="#48575e"/>
+                            </Style>
+
+                        </ComboBox.ItemContainerStyle>
+
+                    </ComboBox>
+                </StackPanel>
+                <Grid Grid.Row="6"
+                      Grid.Column="1"
+                      Margin="10 15 10 0">
+                    <TextBlock Text="Wybierz składnik..." 
+                               IsHitTestVisible="False" 
+                               FontSize="16"
+                               Foreground="#999">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedItem, ElementName=comboBoxIngredient4}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Select Ingredient #5 -->
+                <TextBlock Grid.Row="7"
+                           Grid.Column="0"
+                           Text="Składnik #5:"
+                           FontSize="16"
+                           Margin="20 0 0 0"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+                </TextBlock>
+                <StackPanel
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Margin="10 15 10 0">
+                    <ComboBox Name="comboBoxIngredient5"
+                              materialDesign:TextFieldAssist.UnderlineBrush="#b8cf69"
+                              materialDesign:BottomDashedLineAdorner.Brush="#b8cf69"
+                              materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                              materialDesign:ColorZoneAssist.Mode="Dark">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:FoodProduct}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="LightGray" Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#48575e"/>
+                                <Setter Property="BorderBrush" Value="#48575e"/>
+                            </Style>
+
+                        </ComboBox.ItemContainerStyle>
+
+                    </ComboBox>
+                </StackPanel>
+                <Grid Grid.Row="7"
+                      Grid.Column="1"
+                      Margin="10 15 10 0">
+                    <TextBlock Text="Wybierz składnik..." 
+                               IsHitTestVisible="False" 
+                               FontSize="16"
+                               Foreground="#999">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedItem, ElementName=comboBoxIngredient5}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Save button -->
+                <Button Grid.Row="8"
+                        Grid.Column="1"
+                        Name="SaveButton"
+                        Content="Zapisz"
+                        FontWeight="Normal"
+                        BorderBrush="#FFF"
+                        HorizontalAlignment="Center"
+                        FontSize="15"
+                        Width="150"
+                        Height="40"
+                        BorderThickness="0"
+                        Style="{StaticResource MaterialDesignRaisedButton}" Click="SaveButton_Click">
+                    <Button.Resources>
+                        <Color x:Key="PrimaryHueMidBrushColor">#699b2c</Color>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#2d4a1a" />
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

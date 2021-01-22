@@ -1,0 +1,102 @@
+﻿<Page x:Class="FitApp.Info"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FitApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="600"
+      Title="Informacje">
+
+    <Page.Resources>
+        <!-- Style of menu text -->
+        <Style x:Key="font" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <!-- Tooltip style -->
+        <Style TargetType="ToolTip" x:Key="tt_style">
+            <Setter Property="Placement" Value="Right" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Background" Value="#4A5668" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="PlacementRectangle" Value="60,0,0,0" />
+            <Setter Property="HorizontalOffset" Value="15" />
+            <Setter Property="VerticalOffset" Value="6" />
+            <Setter Property="HasDropShadow" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid Background="Black">
+            <Grid x:Name="background">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Assets/background.jpg"
+                                Stretch="Fill" />
+                </Grid.Background>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="266" />
+                    <RowDefinition Height="266" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="3"
+                           Width="520"
+                           TextAlignment="Center"
+                           Text="Aplikacja pozwalająca na rejestrowanie posiłków &#x0a;i treningów wkonywanych w kontekście kalendarza &#x0a;(rejestruj posiłek i jego kompozycje),&#x0a;rejestracja minut danego treningu &#x0a;- oblicz wartość kaloryczności."
+                           Foreground="White"
+                           FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Background="Transparent"
+                           Style="{StaticResource font}" Margin="70,66.6,10,66">
+
+                    <TextBlock.Effect>
+                        <DropShadowEffect
+                            BlurRadius="10"
+                            ShadowDepth="1"
+                            Direction="-90"
+                            Color="White" />
+                    </TextBlock.Effect>
+
+                </TextBlock>
+
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Text="Aplikacja wykonana przez:&#x0a;Daniel Nowosielecki &#x0a;Paweł Nosażewski"
+                           Foreground="GhostWhite"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           FontSize="16"
+                           Background="Transparent"
+                           Style="{StaticResource font}">
+
+                    <TextBlock.Effect>
+                        <DropShadowEffect
+                            BlurRadius="10"
+                            ShadowDepth="1"
+                            Direction="-90"
+                            Color="White" />
+                    </TextBlock.Effect>
+
+                </TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
